@@ -13,7 +13,6 @@ impl Default for UserMovement {
         Self::Resting
     }
 }
-
 // This constant defines the maximum stamina capacity that any individual can have in the game.
 // It's a universal cap, meaning no individual's stamina can exceed this value under normal game conditions.
 // This is used to set boundaries for stamina-related calculations and ensure game balance.
@@ -28,7 +27,6 @@ static mut YOUR_STAMINA: usize = 100;
 fn on_user_move(/* e: UserEvent */) {
     /* let current_movement = e.get_movement_state() */
     let current_movement = UserMovement::default();
-
     if current_movement == UserMovement::Running {
         unsafe {
             // Check if the user has the required amount of stamina if not then deny the transition to running.
@@ -38,7 +36,6 @@ fn on_user_move(/* e: UserEvent */) {
             change_movement(UserMovement::Walking)
         }
     }
-
     if current_movement == UserMovement::Walking {
         unsafe {
             // stop the user's current stamina from increasing.
@@ -47,7 +44,6 @@ fn on_user_move(/* e: UserEvent */) {
             }
         }
     }
-
     if current_movement == UserMovement::Resting {
         unsafe {
             // stop the user's current stamina from increasing.
